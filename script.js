@@ -7,7 +7,6 @@ const dateElement = document.getElementById('date');
 // Set the date in the element
 dateElement.innerHTML = `${date}`;
 
-
 // Twitter Trends API
 const url = 'https://twitter-trends5.p.rapidapi.com/twitter/request.php';
 const options = {
@@ -25,11 +24,15 @@ fetch(url, options)
 .then(res => res.json())
 .then(result => {
     console.log(result.trends);
-    
-    let topTen = [];
-    for (let i=0; i<10; i++){
-        topTen.push(result.trends[i]);
-    }
+
+    // Convert object to array
+    const trendsArray = Object.values(result.trends);
+
+    // Sort by volume descending
+    trendsArray.sort((a, b) => (b.volume || 0) - (a.volume || 0));
+
+    // Get top 10
+    const topTen = trendsArray.slice(0, 10);
 
     let topics = topTen.map(topic => topic.name);
     console.log(topics);
@@ -44,7 +47,7 @@ fetch(url, options)
         data: {
             labels: topics,
             datasets: [{
-                label: '# of tweets/xeets',
+                label: 'Tweet Volume',
                 data: volumes,
                 borderWidth: 2,
                 backgroundColor: [
@@ -79,11 +82,57 @@ fetch(url, options)
         options: {
             indexAxis: 'y',
             scales: {
+                x:{
+                    title: {
+                        display: true,
+                        text: 'Number of Tweets',
+                        // color: 'white',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    },
+                    ticks:{
+                        // color: 'white'
+                    }
+                },
                 y: {
-                    beginAtZero: true
+                    title: {
+                        display: true,
+                        text: 'Topics',
+                        // color: 'white',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    },
+                    beginAtZero: true,
+                    ticks:{
+                        // color: 'white'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        // color: 'white', // Legend label color
+                        font: {
+                            size: 18,
+                            weight: 'bold'
+                        }
+                    }
                 }
             }
         }
     });
+
+    myChart.onclick = function(evt) {
+        const points = barChart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
+        if (points.length) {
+            const index = points[0].index;
+            const topic = topics[index];
+            window.open(`https://twitter.com/search?q=${encodeURIComponent(topic)}`, '_blank');
+        }
+    };
 })
 
