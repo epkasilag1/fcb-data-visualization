@@ -7,18 +7,6 @@ const dateElement = document.getElementById('date');
 // Set the date in the element
 dateElement.innerHTML = `${date}`;
 
-// Twitter Trends API
-const url = 'https://twitter-trends5.p.rapidapi.com/twitter/request.php';
-const options = {
-	method: 'POST',
-	headers: {
-		'x-rapidapi-key': 'f871a03209mshe39329829fe0e05p10ea79jsn2b66b35f2f35',
-		'x-rapidapi-host': 'twitter-trends5.p.rapidapi.com',
-		'Content-Type': 'application/x-www-form-urlencoded'
-	},
-	body: new URLSearchParams({woeid: '23424934'})
-};
-
 // fetch() - send a request to an API
 fetch(url, options)
 .then(res => res.json())
