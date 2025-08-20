@@ -8,7 +8,7 @@ const dateElement = document.getElementById('date');
 dateElement.innerHTML = `${date}`;
 
 // fetch() - send a request to an API
-fetch('/.api/trends')
+fetch('/.netlify/functions/trends')
 .then(res => res.json())
 .then(result => {
     console.log(result.trends);
