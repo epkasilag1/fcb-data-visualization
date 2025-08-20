@@ -1,34 +1,10 @@
 h3{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, monospace;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;
-    border: 1px solid gray;
-    border-radius: 10px;
-    background-color: lightskyblue;
-    color: white;                     /* fill color */
-    -webkit-text-stroke: 1px black;   /* width + color of outline */
-    -webkit-text-fill-color: white;   /* ensures inside stays white */
-  }
+}
 
 canvas {
     background-color: white;
     padding: 15px;
     border-radius: 10px;
-}
-
-body {
-  position: relative;
-  background: url("images/background.jpg") no-repeat center center / cover;
-  height: 100vh;
-}
-
-body::before {
-  content: "";
-  position: absolute;
-  inset: 0; /* shorthand for top/right/bottom/left: 0 */
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-body * {
-  z-index: 1;
-  opacity: 0.95;
 }
