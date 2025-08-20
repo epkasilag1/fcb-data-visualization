@@ -29,7 +29,7 @@ fetch(url, options)
     const trendsArray = Object.values(result.trends);
 
     // Sort by volume descending
-    trendsArray.sort((a, b) => (b.volume || 0) - (a.volume || 0));
+    // trendsArray.sort((a, b) => (b.volume || 0) - (a.volume || 0));
 
     // Get top 10
     const topTen = trendsArray.slice(0, 10);
