@@ -7,8 +7,20 @@ const dateElement = document.getElementById('date');
 // Set the date in the element
 dateElement.innerHTML = `${date}`;
 
+// Twitter Trends API
+const url = 'https://twitter-trends5.p.rapidapi.com/twitter/request.php';
+const options = {
+	method: 'POST',
+	headers: {
+		'x-rapidapi-key': '8922e03f1dmsh612f8e97b67a93ap10c5c3jsn223d8a227267',
+		'x-rapidapi-host': 'twitter-trends5.p.rapidapi.com',
+		'Content-Type': 'application/x-www-form-urlencoded'
+	},
+	body: new URLSearchParams({woeid: '23424934'})
+};
+
 // fetch() - send a request to an API
-fetch('/.netlify/functions/trends')
+fetch(url, options)
 .then(res => res.json())
 .then(result => {
     console.log(result.trends);
